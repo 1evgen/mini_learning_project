@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import logo from './logo.svg';
 import './App.css';
 import {UserData} from "./lessen_01/UserData";
@@ -69,15 +69,27 @@ const dateUser = [
         age: 15,
         gender: "male"
     } ,
-
 ]
 
 
 
 function App() {
+    let[freshUsersCount, setDeletedUsersCount] = useState(dateUser);
+
+    const deleteUsers = (id_num: number) => {
+        debugger;
+        let  usersWasDelete = freshUsersCount.filter((el)=> el.id !== id_num);
+        setDeletedUsersCount(usersWasDelete);
+    }
+
+
+
   return (
     <div className="App">
-      <UserData nameTable={"The date about Users"}  dataUsers={dateUser}/>
+      <UserData nameTable={"The date about Users"}
+                dataUsers={freshUsersCount}
+                deleteUser={deleteUsers}
+      />
     </div>
   );
 }

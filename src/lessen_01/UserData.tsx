@@ -12,6 +12,7 @@ type typeMainDate = {
 type UserDataType = {
     dataUsers: typeMainDate[]
     nameTable: string
+    deleteUser: (id_num: number)=> void
 }
 
 export const UserData: React.FC<UserDataType> = (props) => {
@@ -48,7 +49,7 @@ export const UserData: React.FC<UserDataType> = (props) => {
                             <td><button>check is block users</button></td>
                             <td><button className={s.block}>block users</button></td>
                             <td><button className={s.unblock}>unblock users</button></td>
-                            <td><button className={s.delete}>DELETE</button></td>
+                            <td><button className={s.delete} onClick={()=> props.deleteUser(element.id) }>DELETE</button></td>
                         </tr>
                     )
                 })}
