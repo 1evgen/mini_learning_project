@@ -1,0 +1,49 @@
+
+
+
+.content {
+    display: flex;
+    justify-content: center;
+    background-color: antiquewhite;
+}
+
+.table {
+    border: 1px solid gold;
+    border-collapse: collapse;
+    /*width: 600px;*/
+    background-color: #282c34;
+}
+
+.thead th {
+    border: 1px solid gold;
+    color: #ffeced;
+    padding: 5px;
+}
+
+.tbody td {
+    border: 1px solid gold;
+    padding: 5px;
+    color: #ffeced;
+}
+
+.tbody button {
+    border: 1px solid gold;
+    border-radius: 20px;
+    background: #5a6986;
+    color: #ffeced;
+}
+
+.tbody .block {
+    border-radius: 0;
+    background-color: #8f0404;
+}
+
+.tbody .unblock {
+    border-radius: 0;
+    background-color: darkgreen;
+}
+
+.tbody .delete {
+    background-color: #8f0404;
+    color: white;
+}
