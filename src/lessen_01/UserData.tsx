@@ -1,7 +1,10 @@
 import React from "react";
 import s from './UserData.module.css'
+import {typeForGender, typeOfAge} from "../App";
 
-type typeMainDate = {
+
+
+ export type typeMainDate = {
     id: number,
     name: string,
     lastName: string,
@@ -13,9 +16,20 @@ type UserDataType = {
     dataUsers: typeMainDate[]
     nameTable: string
     deleteUser: (id_num: number)=> void
+    filterUsersGender: (gender:typeForGender) => void
+    filterUsersAge:(age:typeOfAge) => void
 }
 
 export const UserData: React.FC<UserDataType> = (props) => {
+
+     const handlerFunctionFilter = (gender: typeForGender) => {
+         props.filterUsersGender(gender)
+     }
+     const handlerFilterAge = (age: typeOfAge) => {
+         props.filterUsersAge(age);
+    }
+
+
     return (
         <div className={s.content}>
             <div className={s.wrapper}>
@@ -57,14 +71,15 @@ export const UserData: React.FC<UserDataType> = (props) => {
             </table>
                 <div className={s.filters}>
                 <div className={s.gender}>
-                  <span><button>All</button></span>
-                    <span><button>Man</button></span>
-                    <span><button>Woman</button></span>
+                  <span className={s.buttonOne}><button onClick={()=> handlerFunctionFilter("All")}>All</button></span>
+                    <span className={s.buttonTwo}><button onClick={()=> handlerFunctionFilter("male")} >Man</button></span>
+                    <span className={s.buttonThree}><button onClick={()=> handlerFunctionFilter("female")} >Woman</button></span>
                 </div>
-                <div className={s.age}>
-                    <span><button>Yong</button></span>
-                    <span><button>Old</button></span>
-                </div>
+                    <div className={s.age}>
+                        <span className={s.buttonAll}><button onClick={()=> handlerFilterAge("All")}>All</button></span>
+                         <span className={s.buttonTwo}><button onClick={()=> handlerFilterAge("Yong")}>Age less 27</button></span>
+                        <span className={s.buttonThree} ><button onClick={()=> handlerFilterAge("Old")}>Age more 27</button></span>
+                    </div>
                 </div>
         </div>
 
