@@ -2,26 +2,26 @@ import React from "react";
 import s from './UserData.module.css'
 import {typeForGender, typeOfAge} from "../App";
 
-
-
- export type typeMainDate = {
-    id: number,
+export type typeMainDate = {
+    id: string,
+    number_User: number,
     name: string,
     lastName: string,
-    age: number
-    gender: string
+    age: number,
+    gender: string,
+    isBlock:boolean,
 }
 
 type UserDataType = {
     dataUsers: typeMainDate[]
     nameTable: string
-    deleteUser: (id_num: number)=> void
+    deleteUser: (id_num: string)=> void
     filterUsersGender: (gender:typeForGender) => void
     filterUsersAge:(age:typeOfAge) => void
+
 }
 
 export const UserData: React.FC<UserDataType> = (props) => {
-
      const handlerFunctionFilter = (gender: typeForGender) => {
          props.filterUsersGender(gender)
      }
@@ -29,6 +29,14 @@ export const UserData: React.FC<UserDataType> = (props) => {
          props.filterUsersAge(age);
     }
 
+    const checkedBlockUser = (checkBlock: boolean) => {
+         debugger;
+        if(checkBlock){
+            return  alert('The users is blocked');
+        } else {
+            return  alert('The users is not blocked');
+        }
+    }
 
     return (
         <div className={s.content}>
@@ -40,7 +48,7 @@ export const UserData: React.FC<UserDataType> = (props) => {
             <table className={s.table}>
                 <thead className={s.thead}>
                 <tr >
-                    <th>ID users</th>
+                    <th>Numbers users</th>
                     <th>Name</th>
                     <th>Last Name</th>
                     <th>Age</th>
@@ -55,12 +63,12 @@ export const UserData: React.FC<UserDataType> = (props) => {
                 {props.dataUsers.map((element) => {
                     return (
                         <tr  key={element.id}>
-                            <td>{element.id} </td>
+                            <td>{element.number_User} </td>
                             <td>{element.name}</td>
                             <td>{element.lastName}</td>
                             <td>{element.age}</td>
                             <td>{element.gender}</td>
-                            <td><button>check is block users</button></td>
+                            <td><button onClick={()=> checkedBlockUser(element.isBlock)} >check is block users</button></td>
                             <td><button className={s.block}>block users</button></td>
                             <td><button className={s.unblock}>unblock users</button></td>
                             <td><button className={s.delete} onClick={()=> props.deleteUser(element.id) }>DELETE</button></td>

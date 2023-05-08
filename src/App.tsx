@@ -1,135 +1,158 @@
 import React, {useState} from 'react';
 import './App.css';
 import {typeMainDate, UserData} from "./lessen_01/UserData";
+import {v1} from "uuid";
 
 
 const dateUser = [
     {
-        id: 1,
+        id: v1(),
+        number_User: 1,
         name: 'Evgenii',
         lastName: 'Goncharov',
         age: 27,
-        gender: "male"
+        gender: "male",
+        isBlock: true,
     },
     {
-        id: 2,
+        id: v1(),
+        number_User: 2,
         name: 'Olga',
         lastName: 'Norman',
         age: 18,
-        gender: "female"
+        gender: "female",
+        isBlock:true,
     },
     {
-        id: 3,
+        id: v1(),
+        number_User: 3,
         name: 'Andrey',
         lastName: 'Ivanov',
         age: 22,
-        gender: "male"
+        gender: "male",
+        isBlock:true,
     },
     {
-        id: 4,
+        id: v1(),
+        number_User: 4,
         name: 'Kseniya',
         lastName: 'Proskudina',
         age: 18,
-        gender: "female"
+        gender: "female",
+        isBlock:true,
 
     },
     {
-        id: 5,
+        id: v1(),
+        number_User: 5,
         name: 'Ilia',
         lastName: 'Gordon',
         age: 55,
-        gender: "male"
+        gender: "male",
+        isBlock:false,
     },
     {
-        id: 6,
+        id: v1(),
+        number_User: 6,
         name: 'Kristina',
         lastName: 'Golikova',
         age: 58,
-        gender: "female"
+        gender: "female",
+        isBlock:false,
     },
     {
-        id: 7,
+        id: v1(),
+        number_User: 7,
         name: 'Galina',
         lastName: 'Korovkina',
         age: 32,
-        gender: "female"
+        gender: "female",
+        isBlock:false,
     },
     {
-        id: 8,
+        id: v1(),
+        number_User: 8,
         name: 'Tania',
         lastName: 'Artemova',
         age: 19,
-        gender: "female"
+        gender: "female",
+        isBlock: false,
     },
     {
-        id: 9,
+        id: v1(),
+        number_User: 9,
         name: 'Li',
         lastName: 'su',
         age: 15,
-        gender: "male"
+        gender: "male",
+        isBlock: false,
     },
     {
-        id: 10,
+        id: v1(),
+        number_User: 10,
         name: 'Egor',
         lastName: 'Farmanin',
         age: 29,
-        gender: "male"
+        gender: "male",
+        isBlock: false,
     },
     {
-        id: 11,
+        id: v1(),
+        number_User: 11,
         name: 'Igor',
         lastName: 'Aristotel',
         age: 19,
-        gender: "male"
+        gender: "male",
+        isBlock: true,
     },
 ]
 
-
 export type typeForGender = 'All' | 'male' | 'female';
-export type typeOfAge = "All" | "Yong" | "Old"
+export type typeOfAge = 'All' | 'Yong' | 'Old';
 
 function App() {
-    // delete
-    const [freshUsersCount, setDeletedUsersCount] = useState(dateUser);
-    const deleteUsers = (id_num: number) => {
+    const [freshUsersCount, setDeletedUsersCount] = useState<typeMainDate[]>(dateUser);
+
+    const deleteUsers = (id_num: string) => {
         let usersWasDelete = freshUsersCount.filter((el) => el.id !== id_num);
         setDeletedUsersCount(usersWasDelete);
     };
 
+
     // filter gender
     const [filterGender, setFilterGender] = useState<typeForGender>('All');
-    const filteredUsersGender = (freshUsersCount: typeMainDate[], gender: typeForGender) => {
+    const filteredUsersGender = (users: typeMainDate[], gender: typeForGender) => {
         if (gender === 'All') {
-            return freshUsersCount;
+            return users;
         } else {
-            return freshUsersCount.filter((el) => el.gender === gender);
+            return users.filter((el) => el.gender === gender);
         }
     };
     const newDataUsers = filteredUsersGender(freshUsersCount, filterGender);
 
-// filter age
-    let [filterAge, setFilterAge] = useState<typeOfAge>("All"); // creat useState
-    const filterAgeUsers = (newDataUsers: typeMainDate[], age: typeOfAge) => {   // create function instruction
-        if (age === "All") {                                                     // what will be filters
-            return newDataUsers;
-        } else if (age === "Yong") {
-            return newDataUsers.filter((element) => element.age <= 27);
-        } else if (age === "Old") {
-            return newDataUsers.filter((element) => element.age > 27);
+    // filter age
+    let [filterAge, setFilterAge] = useState<typeOfAge>('All');
+    const filterAgeUsers = (users: typeMainDate[], age: typeOfAge) => {
+        if (age === 'All') {
+            return users;
+        } else if (age === 'Yong') {
+            return users.filter((element) => element.age <= 27);
+        } else if (age === 'Old') {
+            return users.filter((element) => element.age > 27);
         } else {
-            return newDataUsers;
+            return users;
         }
-    }
-    let NewDataAboutUsers = filterAgeUsers(newDataUsers, filterAge);    // create new value and
-                                                                        // pass our new filter' array
+    };
+    let newDataAboutUsers = filterAgeUsers(newDataUsers, filterAge);
+
     return (
         <div className="App">
             <UserData
                 nameTable={'The data about Users'}
-                dataUsers={NewDataAboutUsers}
+                dataUsers={newDataAboutUsers}
                 deleteUser={deleteUsers}
                 filterUsersGender={setFilterGender}
-                filterUsersAge={setFilterAge}             // push function UseState
+                filterUsersAge={setFilterAge}
             />
         </div>
     );
