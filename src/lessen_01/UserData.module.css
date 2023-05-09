@@ -3,6 +3,7 @@
     display: flex;
     justify-content: center;
     background-color: antiquewhite;
+
 }
 
 .table {
@@ -39,6 +40,11 @@
 .tbody .unblock {
     border-radius: 0;
     background-color: darkgreen;
+}
+
+.tbody button:hover {
+    background-color: goldenrod;
+    color: #ffeced;
 }
 
 .tbody .delete {

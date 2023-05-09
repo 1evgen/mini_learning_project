@@ -18,7 +18,8 @@ type UserDataType = {
     deleteUser: (id_num: string)=> void
     filterUsersGender: (gender:typeForGender) => void
     filterUsersAge:(age:typeOfAge) => void
-
+    blockedUser:(id_userBlock: string) => void
+    unblockUser:(id_user: string) => void
 }
 
 export const UserData: React.FC<UserDataType> = (props) => {
@@ -30,11 +31,10 @@ export const UserData: React.FC<UserDataType> = (props) => {
     }
 
     const checkedBlockUser = (checkBlock: boolean) => {
-         debugger;
         if(checkBlock){
-            return  alert('The users is blocked');
+            return  alert('The user is blocked');
         } else {
-            return  alert('The users is not blocked');
+            return  alert('The user is not blocked');
         }
     }
 
@@ -69,8 +69,8 @@ export const UserData: React.FC<UserDataType> = (props) => {
                             <td>{element.age}</td>
                             <td>{element.gender}</td>
                             <td><button onClick={()=> checkedBlockUser(element.isBlock)} >check is block users</button></td>
-                            <td><button className={s.block}>block users</button></td>
-                            <td><button className={s.unblock}>unblock users</button></td>
+                            <td><button className={s.block} onClick={()=> props.blockedUser(element.id)} >block users</button></td>
+                            <td><button className={s.unblock} onClick={()=> props.unblockUser(element.id)}>unblock users</button></td>
                             <td><button className={s.delete} onClick={()=> props.deleteUser(element.id) }>DELETE</button></td>
                         </tr>
                     )
@@ -90,7 +90,6 @@ export const UserData: React.FC<UserDataType> = (props) => {
                     </div>
                 </div>
         </div>
-
         </div>
     )
 }

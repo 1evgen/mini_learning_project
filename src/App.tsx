@@ -12,7 +12,7 @@ const dateUser = [
         lastName: 'Goncharov',
         age: 27,
         gender: "male",
-        isBlock: true,
+        isBlock: false,
     },
     {
         id: v1(),
@@ -21,7 +21,7 @@ const dateUser = [
         lastName: 'Norman',
         age: 18,
         gender: "female",
-        isBlock:true,
+        isBlock:false,
     },
     {
         id: v1(),
@@ -30,7 +30,7 @@ const dateUser = [
         lastName: 'Ivanov',
         age: 22,
         gender: "male",
-        isBlock:true,
+        isBlock: false,
     },
     {
         id: v1(),
@@ -39,7 +39,7 @@ const dateUser = [
         lastName: 'Proskudina',
         age: 18,
         gender: "female",
-        isBlock:true,
+        isBlock:false,
 
     },
     {
@@ -103,7 +103,7 @@ const dateUser = [
         lastName: 'Aristotel',
         age: 19,
         gender: "male",
-        isBlock: true,
+        isBlock: false,
     },
 ]
 
@@ -111,14 +111,38 @@ export type typeForGender = 'All' | 'male' | 'female';
 export type typeOfAge = 'All' | 'Yong' | 'Old';
 
 function App() {
-    const [freshUsersCount, setDeletedUsersCount] = useState<typeMainDate[]>(dateUser);
 
+    const [freshUsersCount, setDeletedUsersCount] = useState<typeMainDate[]>(dateUser);
     const deleteUsers = (id_num: string) => {
         let usersWasDelete = freshUsersCount.filter((el) => el.id !== id_num);
         setDeletedUsersCount(usersWasDelete);
     };
+/////////////////
+    const blockUsers = (id_userBlock: string, ) => {
+        let newDataStatusUsers = freshUsersCount.map((el)=> {
+            if(el.id === id_userBlock){
+                return {...el, isBlock: true};
+            } else {
+                return el
+            }
+        })
+        setDeletedUsersCount(newDataStatusUsers);
+    }
+
+const unlockUser = (id_user: string) => {
+        let newDateStatusUsersUn = freshUsersCount.map((el)=> {
+            if(el.id === id_user){
+                return {... el, isBlock: false}
+            } else {
+                return el
+            }
+        })
+    setDeletedUsersCount(newDateStatusUsersUn)
+}
 
 
+
+//////////////////
     // filter gender
     const [filterGender, setFilterGender] = useState<typeForGender>('All');
     const filteredUsersGender = (users: typeMainDate[], gender: typeForGender) => {
@@ -145,6 +169,7 @@ function App() {
     };
     let newDataAboutUsers = filterAgeUsers(newDataUsers, filterAge);
 
+
     return (
         <div className="App">
             <UserData
@@ -153,6 +178,8 @@ function App() {
                 deleteUser={deleteUsers}
                 filterUsersGender={setFilterGender}
                 filterUsersAge={setFilterAge}
+                blockedUser={blockUsers}
+                unblockUser={unlockUser}
             />
         </div>
     );
