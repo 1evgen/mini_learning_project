@@ -52,21 +52,6 @@
     color: white;
 }
 
-.filters {
+.s.filters {
     display: flex;
-    background-color: #283b48
-}
-
-.filters .gender {
-    border: 1px solid black;
-    width: 383px;
-    height: 20px;
-    padding: 10px;
-}
-
-.filters .age {
-    border: 1px solid black;
-    width: 383px;
-    height: 20px;
-    padding: 10px;
 }

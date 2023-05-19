@@ -1,0 +1,24 @@
+
+.filters {
+    display: flex;
+    background-color: #283b48;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-around;
+
+}
+
+.filters .gender .h5 {
+    border: 1px solid black;
+    width: 409px;
+    height: 20px;
+    padding: 10px;
+}
+
+
+.filters .age .h5 {
+    border: 1px solid black;
+    width: 409px;
+    height: 20px;
+    padding: 10px;
+}
