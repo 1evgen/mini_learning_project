@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import s from './UserData.module.css'
 import {typeForGender, typeOfAge} from "../../App";
 import {FilterGender} from "../FilterGender/FilterGender";
+import {BlockUsers} from "../BlockUsers/BlockUSers";
 
 export type typeMainDate = {
     id: string,
@@ -13,7 +14,7 @@ export type typeMainDate = {
     isBlock:boolean,
 }
 
-type UserDataType = {
+export type UserDataType = {
     dataUsers: typeMainDate[]
     nameTable: string
     deleteUser: (id_num: string)=> void
@@ -26,15 +27,6 @@ type UserDataType = {
 }
 
 export const UserData: React.FC<UserDataType> = (props) => {
-
-
-    const checkedBlockUser = (checkBlock: boolean) => {
-        if(checkBlock){
-            return  alert('The user is blocked');
-        } else {
-            return  alert('The user is not blocked');
-        }
-    }
 
     return (
         <div className={s.content}>
@@ -66,10 +58,10 @@ export const UserData: React.FC<UserDataType> = (props) => {
                             <td>{element.lastName}</td>
                             <td>{element.age}</td>
                             <td>{element.gender}</td>
-                            <td><button onClick={()=> checkedBlockUser(element.isBlock)} >check is block users</button></td>
-                            <td><button className={s.block} onClick={()=> props.blockedUser(element.id)} >block users</button></td>
-                            <td><button className={s.unblock} onClick={()=> props.unblockUser(element.id)}>unblock users</button></td>
-                            <td><button className={s.delete} onClick={()=> props.deleteUser(element.id) }>DELETE</button></td>
+                            <BlockUsers element={element}
+                                        blockedUser={props.blockedUser}
+                                        unblockUser={props.unblockUser}
+                                        deleteUser={props.deleteUser} />
                         </tr>
                     )
                 })}
@@ -85,3 +77,4 @@ export const UserData: React.FC<UserDataType> = (props) => {
 
     )
 }
+

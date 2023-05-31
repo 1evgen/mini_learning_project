@@ -128,6 +128,8 @@ const unlockUser = (id_user: string) => {
             (el.id === id_user) ? {...el, isBlock: false} : el );
     setDeletedUsersCount(newDateStatusUsersUn)
 }
+
+
     // filter gender
     const [filterGender, setFilterGender] = useState<typeForGender>('All');
     const filteredUsersGender = (users: typeMainDate[], gender: typeForGender) => {
