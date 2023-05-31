@@ -9,6 +9,7 @@ type FilterGenderProps = {
     nameFilterAge: string
 };
 
+
 export const FilterGender: React.FC<FilterGenderProps> = ({
                                                               filterUsersGender,
                                                               filterUsersAge,
