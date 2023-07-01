@@ -1,8 +1,10 @@
 import React, {useState} from "react";
 import s from './UserData.module.css'
 import {typeForGender, typeOfAge} from "../../App";
-import {FilterGender} from "../FilterGender/FilterGender";
-import {BlockUsers} from "../BlockUsers/BlockUSers";
+import {FilterUser} from "../FilterGender/FilterUser";
+import {BlockUsers} from "../BlockUsers/BlockUsers";
+import {UserInformation} from "../UserInformation/UserInformation";
+
 
 export type typeMainDate = {
     id: string,
@@ -17,9 +19,9 @@ export type typeMainDate = {
 export type UserDataType = {
     dataUsers: typeMainDate[]
     nameTable: string
-    deleteUser: (id_num: string)=> void
-    blockedUser:(id_userBlock: string) => void
-    unblockUser:(id_user: string) => void
+    deleteUser: (id_user: string)=> void
+    blockedUser:(id_user: string,isBlocked: boolean) => void
+    unblockUser:(id_user: string, isBlocked: boolean) => void
     filterUsersGender: (gender: typeForGender)=> void
     filterUsersAge: (age: typeOfAge) => void
     nameFiltersGender: string
@@ -27,6 +29,7 @@ export type UserDataType = {
 }
 
 export const UserData: React.FC<UserDataType> = (props) => {
+
 
     return (
         <div className={s.content}>
@@ -50,31 +53,33 @@ export const UserData: React.FC<UserDataType> = (props) => {
                 </tr>
                 </thead>
                 <tbody className={s.tbody}>
-                {props.dataUsers.map((element) => {
+                { props.dataUsers.map((element) => {
                     return (
                         <tr  key={element.id}>
-                            <td>{element.number_User} </td>
-                            <td>{element.name}</td>
-                            <td>{element.lastName}</td>
-                            <td>{element.age}</td>
-                            <td>{element.gender}</td>
+                            <UserInformation element={element} />
                             <BlockUsers element={element}
                                         blockedUser={props.blockedUser}
                                         unblockUser={props.unblockUser}
-                                        deleteUser={props.deleteUser} />
+                                        deleteUser={props.deleteUser}
+
+                            />
                         </tr>
                     )
                 })}
                 </tbody>
             </table>
-                <FilterGender filterUsersGender={props.filterUsersGender}
-                              filterUsersAge={props.filterUsersAge}
-                              nameFiltersGender={props.nameFiltersGender}
-                              nameFilterAge={props.nameFilterAge}
+                <FilterUser filterUsersGender={props.filterUsersGender}
+                            filterUsersAge={props.filterUsersAge}
+                            nameFiltersGender={props.nameFiltersGender}
+                            nameFilterAge={props.nameFilterAge}
                 />
             </div>
         </div>
 
     )
 }
+
+
+
+
 

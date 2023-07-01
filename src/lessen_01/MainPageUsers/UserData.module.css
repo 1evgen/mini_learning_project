@@ -55,3 +55,7 @@
 .s.filters {
     display: flex;
 }
+
+.disabled button {
+    opacity: 0%;
+}

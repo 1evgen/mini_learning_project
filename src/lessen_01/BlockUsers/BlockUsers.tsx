@@ -3,10 +3,11 @@ import React from "react";
 import {typeMainDate} from "../MainPageUsers/UserData";
 
  export type BlockUsersType = {
-    blockedUser:(id_userBlock: string) => void
-    unblockUser:(id_user: string) => void
+    blockedUser:(id_user: string, isBlocked: boolean) => void
+    unblockUser:(id_user: string, isBlocked: boolean) => void
     deleteUser: (id_num: string)=> void
     element: typeMainDate
+
 }
 
 export const BlockUsers = (props:BlockUsersType) => {
@@ -15,8 +16,8 @@ export const BlockUsers = (props:BlockUsersType) => {
         (checkBlock) ? alert('The user is blocked'):alert('The user is not blocked')
     }
     const checkedBlockUsersHandler = ()=> {checkedBlockUser(props.element.isBlock)}
-    const blockUsersHandler = () => {props.blockedUser(props.element.id)}
-    const unblockUsersHandler = () => {props.unblockUser(props.element.id)}
+    const blockUsersHandler = () => {props.blockedUser(props.element.id, true)}
+    const unblockUsersHandler = () => {props.unblockUser(props.element.id, false)}
     const deleteUsersHandler =() => {props.deleteUser(props.element.id)}
 
     return (
