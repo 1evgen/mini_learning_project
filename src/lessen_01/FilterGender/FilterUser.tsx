@@ -10,7 +10,7 @@ type FilterGenderProps = {
 };
 
 
-export const FilterGender: React.FC<FilterGenderProps> = ({
+export const FilterUser: React.FC<FilterGenderProps> = ({
                                                               filterUsersGender,
                                                               filterUsersAge,
                                                               nameFiltersGender,
@@ -18,8 +18,10 @@ export const FilterGender: React.FC<FilterGenderProps> = ({
                                                           }) => {
     const handlerFunctionFilter = (gender: typeForGender) => {
         filterUsersGender(gender);
+        console.log(gender)
     };
     const handlerFilterAge = (age: typeOfAge) => {
+        console.log(age)
         filterUsersAge(age);
     };
 
@@ -52,5 +54,5 @@ export const FilterGender: React.FC<FilterGenderProps> = ({
             </div>
         </div>
     );
-};
+}
 
